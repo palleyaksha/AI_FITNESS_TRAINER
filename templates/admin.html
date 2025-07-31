@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - AI Fitness Trainer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --primary-light: #e0e7ff;
+            --secondary: #10b981;
+            --secondary-dark: #059669;
+            --secondary-light: #d1fae5;
+            --dark: #1f2937;
+            --light: #f9fafb;
+            --gray: #6b7280;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --sidebar-width: 250px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #f3f4f6;
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+        }
+        
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--dark);
+            height: 100vh;
+            position: fixed;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
+            color: white;
+        }
+        
+        .sidebar-header {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .sidebar-logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: white;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        .sidebar-logo i {
+            margin-right: 10px;
+        }
+        
+        .sidebar-menu {
+            padding: 20px 0;
+            flex: 1;
+            overflow-y: auto;
+        }
+        
+        .menu-category {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 600;
+            padding: 10px 20px;
+            margin-top: 10px;
+        }
+        
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+        }
+        
+        .menu-item:hover, .menu-item.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-left-color: var(--primary);
+        }
+        
+        .menu-item i {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+        
+        .sidebar-footer {
+            padding: 15px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+        
+        .user-details {
+            flex: 1;
+        }
+        
+        .user-name {
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .user-role {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .logout-btn {
+            margin-left: 10px;
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .logout-btn:hover {
+            color: white;
+        }
+        
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 20px;
+            width: calc(100% - var(--sidebar-width));
+        }
+        
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .page-title {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--secondary-dark);
+        }
+        
+        .btn-danger {
+            background-color: var(--danger);
+        }
+        
+        .btn-danger:hover {
+            background-color: #dc2626;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .dashboard-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 20px;
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        .icon-primary {
+            background-color: var(--primary);
+        }
+        
+        .icon-secondary {
+            background-color: var(--secondary);
+        }
+        
+        .icon-warning {
+            background-color: var(--warning);
+        }
+        
+        .icon-danger {
+            background-color: var(--danger);
+        }
+        
+        .card-value {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .card-label {
+            font-size: 14px;
+            color: var(--gray);
+        }
+        
+        .table-container {
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        th {
+            background-color: #f9fafb;
+            font-weight: 600;
+        }
+        
+        tr:hover {
+            background-color: #f9fafb;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .action-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+        
+        .action-btn:hover {
+            opacity: 0.8;
+        }
+        
+        .edit-btn {
+            background-color: var(--primary);
+        }
+        
+        .delete-btn {
+            background-color: var(--danger);
+        }
+        
+        .view-btn {
+            background-color: var(--secondary);
+        }
+        
+        .alert {
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        .alert-success {
+            background-color: var(--secondary-light);
+            color: var(--secondary-dark);
+            border: 1px solid #a7f3d0;
+        }
+        
+        .alert-danger {
+            background-color: #fee2e2;
+            color: var(--danger);
+            border: 1px solid #fecaca;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s;
+            }
+            
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+            }
+            
+            .mobile-toggle {
+                display: block;
+                position: fixed;
+                top: 20px;
+                left: 20px;
+                z-index: 101;
+                background-color: white;
+                width: 40px;
+                height: 40px;
+                border-radius: 5px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                cursor: pointer;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <a href="/" class="sidebar-logo">
+                <i class="fas fa-dumbbell"></i>
+                Admin Panel
+            </a>
+        </div>
+        
+        <div class="sidebar-menu">
+            <div class="menu-category">Main</div>
+            <a href="/admin" class="menu-item active">
+                <i class="fas fa-tachometer-alt"></i>
+                Dashboard
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-users"></i>
+                Users
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-chart-bar"></i>
+                Statistics
+            </a>
+            
+            <div class="menu-category">Management</div>
+            <a href="#" class="menu-item">
+                <i class="fas fa-cog"></i>
+                Settings
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-database"></i>
+                Backup
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-bell"></i>
+                Notifications
+            </a>
+        </div>
+        
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="user-avatar">
+                    A
+                </div>
+                <div class="user-details">
+                    <div class="user-name">Admin</div>
+                    <div class="user-role">Administrator</div>
+                </div>
+                <a href="/logout" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="main-content">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        <div class="page-header">
+            <h1 class="page-title">Admin Dashboard</h1>
+            <div>
+                <a href="#" class="btn">
+                    <i class="fas fa-plus"></i>
+                    Add User
+                </a>
+                <a href="#" class="btn btn-secondary">
+                    <i class="fas fa-download"></i>
+                    Export Data
+                </a>
+            </div>
+        </div>
+        
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h2 class="card-title">Total Users</h2>
+                    <div class="card-icon icon-primary">
+                        <i class="fas fa-users"></i>
+                    </div>
+                </div>
+                <div class="card-value">{{ users|length }}</div>
+                <div class="card-label">Registered users</div>
+            </div>
+            
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h2 class="card-title">Active Today</h2>
+                    <div class="card-icon icon-secondary">
+                        <i class="fas fa-user-check"></i>
+                    </div>
+                </div>
+                <div class="card-value">
+                    {% set active_today = 0 %}
+                    {% for user in users %}
+                        {% if user.last_login and user.last_login.date() == now().date() %}
+                            {% set active_today = active_today + 1 %}
+                        {% endif %}
+                    {% endfor %}
+                    {{ active_today }}
+                </div>
+                <div class="card-label">Users active today</div>
+            </div>
+            
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h2 class="card-title">Male Users</h2>
+                    <div class="card-icon icon-warning">
+                        <i class="fas fa-mars"></i>
+                    </div>
+                </div>
+                <div class="card-value">
+                    {% set male_users = 0 %}
+                    {% for user in users %}
+                        {% if user.gender == 'Male' %}
+                            {% set male_users = male_users + 1 %}
+                        {% endif %}
+                    {% endfor %}
+                    {{ male_users }}
+                </div>
+                <div class="card-label">Male users</div>
+            </div>
+            
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h2 class="card-title">Female Users</h2>
+                    <div class="card-icon icon-danger">
+                        <i class="fas fa-venus"></i>
+                    </div>
+                </div>
+                <div class="card-value">
+                    {% set female_users = 0 %}
+                    {% for user in users %}
+                        {% if user.gender == 'Female' %}
+                            {% set female_users = female_users + 1 %}
+                        {% endif %}
+                    {% endfor %}
+                    {{ female_users }}
+                </div>
+                <div class="card-label">Female users</div>
+            
+            </div>
+        </div>
+        
+        <div class="dashboard-card">
+            <div class="card-header">
+                <h2 class="card-title">User Management</h2>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thea>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Username</th>
+                            <th>Age</th>
+                            <th>Gender</th>
+                            <th>Weight (kg)</th>
+                            <th>Height (cm)</th>
+                            <th>Login Streak</th>
+                            <th>Last Login</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                        <tr>
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.name }}</td>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.age }}</td>
+                            <td>{{ user.gender }}</td>
+                            <td>{{ user.weight }}</td>
+                            <td>{{ user.height }}</td>
+                            <td>{{ user.login_streak }}</td>
+                            <td>{{ user.last_login.strftime('%Y-%m-%d %H:%M') if user.last_login else 'Never' }}</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <div class="action-btn view-btn" title="View User">
+                                        <i class="fas fa-eye"></i>
+                                    </div>
+                                    <div class="action-btn edit-btn" title="Edit User">
+                                        <i class="fas fa-edit"></i>
+                                    </div>
+                                    <div class="action-btn delete-btn" title="Delete User">
+                                        <i class="fas fa-trash"></i>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Mobile sidebar toggle
+        function toggleSidebar() {
+            document.querySelector('.sidebar').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - AI Fitness Trainer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --primary-light: #e0e7ff;
+            --secondary: #10b981;
+            --secondary-dark: #059669;
+            --secondary-light: #d1fae5;
+            --dark: #1f2937;
+            --light: #f9fafb;
+            --gray: #6b7280;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --sidebar-width: 250px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #f3f4f6;
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+        }
+        
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: white;
+            height: 100vh;
+            position: fixed;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar-header {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .sidebar-logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar-logo:hover {
+            transform: scale(1.05);
+        }
+        
+        .sidebar-logo i {
+            margin-right: 10px;
+        }
+        
+        .sidebar-menu {
+            padding: 20px 0;
+            flex: 1;
+            overflow-y: auto;
+        }
+        
+        .menu-category {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: var(--gray);
+            font-weight: 600;
+            padding: 10px 20px;
+            margin-top: 10px;
+        }
+        
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: var(--dark);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+            position: relative;
+        }
+        
+        .menu-item:hover, .menu-item.active {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            border-left-color: var(--primary);
+        }
+        
+        .menu-item i {
+            margin-right: 10px;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+        
+        .menu-item:hover i, .menu-item.active i {
+            transform: translateX(3px);
+        }
+        
+        .sidebar-footer {
+            padding: 15px 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .user-avatar:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(79, 70, 229, 0.3);
+        }
+        
+        .user-details {
+            flex: 1;
+        }
+        
+        .user-name {
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .user-role {
+            font-size: 12px;
+            color: var(--gray);
+        }
+        
+        .logout-btn {
+            margin-left: 10px;
+            color: var(--gray);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .logout-btn:hover {
+            color: var(--danger);
+            transform: scale(1.2);
+        }
+        
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 20px;
+            width: calc(100% - var(--sidebar-width));
+            transition: all 0.3s ease;
+        }
+        
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .page-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--dark);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .page-title::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            bottom: 0;
+            left: 0;
+            border-radius: 3px;
+        }
+        
+        .settings-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        
+        .settings-card {
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .settings-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .settings-section {
+            margin-bottom: 30px;
+        }
+        
+        .settings-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--dark);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            bottom: 0;
+            left: 0;
+            border-radius: 2px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background-color: #f9fafb;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px var(--primary-light);
+            background-color: white;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .toggle-slider {
+            background-color: var(--primary);
+        }
+        
+        input:focus + .toggle-slider {
+            box-shadow: 0 0 1px var(--primary);
+        }
+        
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+        
+        .toggle-option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .toggle-label {
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(79, 70, 229, 0.1);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(79, 70, 229, 0.2);
+        }
+        
+        .btn i {
+            margin-right: 8px;
+        }
+        
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: 500;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .alert-success {
+            background-color: var(--secondary-light);
+            color: var(--secondary-dark);
+            border: 1px solid #a7f3d0;
+        }
+        
+        .alert-danger {
+            background-color: #fee2e2;
+            color: var(--danger);
+            border: 1px solid #fecaca;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s;
+            }
+            
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="/" class="sidebar-logo">
+                <i class="fas fa-dumbbell"></i>
+                AI Fitness Trainer
+            </a>
+        </div>
+        
+        <div class="sidebar-menu">
+            <div class="menu-category">Main</div>
+            <a href="/dashboard" class="menu-item">
+                <i class="fas fa-tachometer-alt"></i>
+                Dashboard
+            </a>
+            <a href="/video_detection" class="menu-item">
+                <i class="fas fa-video"></i>
+                Video Detection
+            </a>
+            <a href="/live_monitor" class="menu-item">
+                <i class="fas fa-camera"></i>
+                Live Monitor
+            </a>
+            
+            <div class="menu-category">Account</div>
+            <a href="/profile" class="menu-item">
+                <i class="fas fa-user"></i>
+                Profile
+            </a>
+            <a href="/workout_history" class="menu-item">
+                <i class="fas fa-history"></i>
+                Workout History
+            </a>
+            <a href="/achievements" class="menu-item">
+                <i class="fas fa-medal"></i>
+                Achievements
+            </a>
+            <a href="/settings" class="menu-item active">
+                <i class="fas fa-cog"></i>
+                Settings
+            </a>
+        </div>
+        
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="user-avatar">
+                    {{ user.name[0] }}
+                </div>
+                <div class="user-details">
+                    <div class="user-name">{{ user.name }}</div>
+                    <div class="user-role">Member</div>
+                </div>
+                <a href="/logout" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="main-content">
+        <div class="page-header">
+            <h1 class="page-title">Settings</h1>
+        </div>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        <div class="settings-container">
+            <div class="settings-card">
+                <div class="settings-section">
+                    <h3 class="section-title">Account Settings</h3>
+                    <form action="/update_profile" method="POST">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" class="form-control" value="{{ user.name }}" required>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="age">Age</label>
+                                <input type="number" id="age" name="age" class="form-control" value="{{ user.age }}" min="1" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="gender">Gender</label>
+                                <select id="gender" name="gender" class="form-control" required>
+                                    <option value="Male" {% if user.gender == 'Male' %}selected{% endif %}>Male</option>
+                                    <option value="Female" {% if user.gender == 'Female' %}selected{% endif %}>Female</option>
+                                    <option value="Other" {% if user.gender == 'Other' %}selected{% endif %}>Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="weight">Weight (kg)</label>
+                                <input type="number" id="weight" name="weight" class="form-control" value="{{ user.weight }}" step="0.1" min="1" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="height">Height (cm)</label>
+                                <input type="number" id="height" name="height" class="form-control" value="{{ user.height }}" step="0.1" min="1" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="password">Change Password (leave blank to keep current)</label>
+                            <input type="password" id="password" name="password" class="form-control">
+                        </div>
+                        
+                        <button type="submit" class="btn">
+                            <i class="fas fa-save"></i>
+                            Save Changes
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="settings-card">
+                <div class="settings-section">
+                    <h3 class="section-title">Notification Settings</h3>
+                    
+                    <div class="toggle-option">
+                        <div class="toggle-label">Email Notifications</div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="toggle-option">
+                        <div class="toggle-label">Push Notifications</div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="toggle-option">
+                        <div class="toggle-label">Workout Reminders</div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="toggle-option">
+                        <div class="toggle-label">Achievement Alerts</div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    
+                    <button class="btn">
+                        <i class="fas fa-save"></i>
+                        Save Notification Settings
+                    </button>
+                </div>
+            </div>
+            
+            <div class="settings-card">
+                <div class="settings-section">
+                    <h3 class="section-title">Privacy Settings</h3>
+                    
+                    <div class="toggle-option">
+                        <div class="toggle-label">Share Workout Data</div>
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="toggle-option">
+                        <div class="toggle-label">Allow Data Collection for Improvement</div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="toggle-option">
+                        <div class="toggle-label">Show Profile to Other Users</div>
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    
+                    <button class="btn">
+                        <i class="fas fa-save"></i>
+                        Save Privacy Settings
+                    </button>
+                </div>
+            </div>
+            
+            <div class="settings-card">
+                <div class="settings-section">
+                    <h3 class="section-title">Danger Zone</h3>
+                    
+                    <div class="form-group">
+                        <button class="btn" style="background: linear-gradient(135deg, var(--danger), #dc2626);">
+                            <i class="fas fa-trash"></i>
+                            Delete Account
+                        </button>
+                        <p style="margin-top: 10px; font-size: 14px; color: var(--gray);">
+                            This action cannot be undone. All your data will be permanently deleted.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
