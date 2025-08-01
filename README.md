@@ -76,34 +76,45 @@ AI_FITNESS_TRAINER/
 └── README.md
 ```
 ## Screenshots
-1. Server Launch Screen
+
+1. Server Launch Screen:
+
    <img width="981" height="544" alt="image" src="https://github.com/user-attachments/assets/53352665-17e0-400c-8fcc-5dad582823d6" />
 
 2. Landing Page 
+
    <img width="1886" height="950" alt="image" src="https://github.com/user-attachments/assets/49fdb7f2-b7c5-428b-b86c-3050f79e758f" />
 
 3. Home Page
+
    <img width="1878" height="944" alt="image" src="https://github.com/user-attachments/assets/241d624c-8d66-4cae-8443-7f9422386901" />
 
 4. Upload Video Detection  
+
    <img width="1888" height="934" alt="image" src="https://github.com/user-attachments/assets/81a2811b-862c-458e-b71e-8d78425dd5c7" />
 
 5. Results for Uploaded Video
-   <img width="1863" height="945" alt="image" src="https://github.com/user-attachments/assets/121ac0f8-211a-4544-9ac1-faabb3a1378f" />
+
+    <img width="1863" height="945" alt="image" src="https://github.com/user-attachments/assets/121ac0f8-211a-4544-9ac1-faabb3a1378f" />
 
 6. Live Camera Results
+
    <img width="1144" height="609" alt="image" src="https://github.com/user-attachments/assets/a361a4ab-f17b-408a-81c6-beb103114292" />
    
 7. Workout Progress
+
    <img width="1068" height="566" alt="image" src="https://github.com/user-attachments/assets/c23c2733-6acd-4cc4-9c89-4427a5cf347d" />
 
 8. History of Workouts
+
    <img width="1090" height="592" alt="image" src="https://github.com/user-attachments/assets/a65035bd-b450-4a1d-a5ff-dabfa355e4ad" />
 
 9. Feedback section 
+
    <img width="1179" height="658" alt="image" src="https://github.com/user-attachments/assets/56057d60-0008-4bae-a295-a0a5ab6262c2" />
 
 10. ChatBot
+
     <img width="641" height="883" alt="image" src="https://github.com/user-attachments/assets/0c10483a-0e5e-44ff-877b-3af86c5abb24" />
 
 ## 🎯 Future Enhancements
