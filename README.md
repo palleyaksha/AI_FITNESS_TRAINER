@@ -50,27 +50,20 @@ git clone https://github.com/palleyaksha/AI_FITNESS_TRAINER.git
 cd AI_FITNESS_TRAINER
 pip install -r requirements.txt
 python app.py
+```
 📦 Dependencies
+
 Python 3.8+
-
 PyTorch
-
 torchvision
-
 timm
-
 scikit-learn
-
 matplotlib, seaborn
-
 Flask
-
 MediaPipe
 
 📂 Project Structure
-csharp
-Copy
-Edit
+
 AI_FITNESS_TRAINER/
 ├── app.py                   # Flask app
 ├── models/                  # Trained model weights
@@ -81,19 +74,26 @@ AI_FITNESS_TRAINER/
 │   └── preprocessing.py     # Image preprocessing
 ├── dataset/                 # (Optional) Custom dataset
 └── README.md
+
 🎯 Future Enhancements
+
 Add more exercise classes and fine-tune for complexity.
-
 Mobile app deployment with TensorFlow Lite / PyTorch Mobile.
-
 Voice guidance and repetition counting with NLP integration.
 
-
 🙌 Acknowledgements
+
 BEiT Transformer by Microsoft
-
 MediaPipe Holistic Model by Google
-
 PyTorch for deep learning
+
+📝 License
+This project is licensed under the MIT License.
+
+📞 Contact
+
+Palle Yaksha Reddy - palleyaksha28@gmail.com
+Project Link: https://github.com/palleyaksha/AI_FITNESS_TRAINER
+
 
 
