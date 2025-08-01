@@ -88,8 +88,6 @@ Mobile app deployment with TensorFlow Lite / PyTorch Mobile.
 
 Voice guidance and repetition counting with NLP integration.
 
-📃 License
-This project is open-source and available under the MIT License.
 
 🙌 Acknowledgements
 BEiT Transformer by Microsoft
@@ -98,6 +96,4 @@ MediaPipe Holistic Model by Google
 
 PyTorch for deep learning
 
-yaml
-Copy
-Edit
+
