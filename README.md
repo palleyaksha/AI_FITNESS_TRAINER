@@ -55,17 +55,19 @@ python app.py
 
 - **Python 3.8+**
 
-PyTorch
+- **PyTorch**
 
-torchvision
-timm
+- **torchvision**
+  
+- **timm**
 
-scikit-learn
+- **scikit-learn**
 
-matplotlib, seaborn
+- **matplotlib, seaborn**
 
-Flask
-MediaPipe
+- **Flask**
+- 
+- **MediaPipe**
 
 ## 📂 Project Structure
 ```
