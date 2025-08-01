@@ -53,21 +53,19 @@ python app.py
 ```
 ## 📦 Dependencies
 
-** Python 3.8+
+- **Python 3.8+**
 
-** PyTorch
+PyTorch
 
-** torchvision
+torchvision
+timm
 
-** timm
+scikit-learn
 
-** scikit-learn
+matplotlib, seaborn
 
-** matplotlib, seaborn
-
-** Flask
-
-** MediaPipe
+Flask
+MediaPipe
 
 ## 📂 Project Structure
 ```
