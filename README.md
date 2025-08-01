@@ -54,15 +54,22 @@ python app.py
 ## 📦 Dependencies
 
 Python 3.8+
+
 PyTorch
+
 torchvision
+
 timm
+
 scikit-learn
+
 matplotlib, seaborn
+
 Flask
+
 MediaPipe
 
-📂 Project Structure
+## 📂 Project Structure
 ```
 AI_FITNESS_TRAINER/
 ├── app.py                   # Flask app
@@ -83,7 +90,7 @@ Mobile app deployment with TensorFlow Lite / PyTorch Mobile.
 
 Voice guidance and repetition counting with NLP integration.
 
-##🙌 Acknowledgements
+## 🙌 Acknowledgements
 
 BEiT Transformer by Microsoft
 
@@ -91,11 +98,11 @@ MediaPipe Holistic Model by Google
 
 PyTorch for deep learning
 
-##📝 License
+## 📝 License
 
 This project is licensed under the MIT License.
 
-##📞 Contact
+## 📞 Contact
 
 Palle Yaksha Reddy - palleyaksha28@gmail.com
 
