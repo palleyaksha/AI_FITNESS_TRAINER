@@ -66,7 +66,7 @@ python app.py
 - **matplotlib, seaborn**
 
 - **Flask**
-- 
+
 - **MediaPipe**
 
 ## 📂 Project Structure
