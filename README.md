@@ -63,7 +63,7 @@ Flask
 MediaPipe
 
 📂 Project Structure
-
+```
 AI_FITNESS_TRAINER/
 ├── app.py                   # Flask app
 ├── models/                  # Trained model weights
@@ -74,25 +74,31 @@ AI_FITNESS_TRAINER/
 │   └── preprocessing.py     # Image preprocessing
 ├── dataset/                 # (Optional) Custom dataset
 └── README.md
-
-🎯 Future Enhancements
+```
+##🎯 Future Enhancements
 
 Add more exercise classes and fine-tune for complexity.
+
 Mobile app deployment with TensorFlow Lite / PyTorch Mobile.
+
 Voice guidance and repetition counting with NLP integration.
 
-🙌 Acknowledgements
+##🙌 Acknowledgements
 
 BEiT Transformer by Microsoft
+
 MediaPipe Holistic Model by Google
+
 PyTorch for deep learning
 
-📝 License
+##📝 License
+
 This project is licensed under the MIT License.
 
-📞 Contact
+##📞 Contact
 
 Palle Yaksha Reddy - palleyaksha28@gmail.com
+
 Project Link: https://github.com/palleyaksha/AI_FITNESS_TRAINER
 
 
