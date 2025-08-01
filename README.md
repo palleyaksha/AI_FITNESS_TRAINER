@@ -51,7 +51,7 @@ cd AI_FITNESS_TRAINER
 pip install -r requirements.txt
 python app.py
 ```
-📦 Dependencies
+## 📦 Dependencies
 
 Python 3.8+
 PyTorch
@@ -75,7 +75,7 @@ AI_FITNESS_TRAINER/
 ├── dataset/                 # (Optional) Custom dataset
 └── README.md
 ```
-##🎯 Future Enhancements
+## 🎯 Future Enhancements
 
 Add more exercise classes and fine-tune for complexity.
 
